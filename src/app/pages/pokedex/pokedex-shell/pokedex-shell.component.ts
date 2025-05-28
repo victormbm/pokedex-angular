@@ -34,13 +34,22 @@ set inputValue(value: string) {
     });
   }
 
+  playCry(id: number) {
+  const audio = new Audio(`https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`);
+  audio.volume = 0.4; // opcional
+  audio.play().catch(err => console.warn('Erro ao tocar áudio', err));
+  }
+
+
   next() {
     this.currentId.update(v => v + 1);
+     this.playCry(this.currentId());
   }
 
   prev() {
     if (this.currentId() > 1) {
       this.currentId.update(v => v - 1);
+       this.playCry(this.currentId());
     }
   }
 
@@ -50,6 +59,7 @@ set inputValue(value: string) {
       next: (res) => {
         this.pokemon.set(res);
         this.currentId.set(res.id);
+        this.playCry(res.id);
       },
       error: () => alert('Pokémon não encontrado 😢')
     });

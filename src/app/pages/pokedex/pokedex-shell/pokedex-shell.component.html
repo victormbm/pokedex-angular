@@ -1,11 +1,11 @@
-<div class="min-h-screen flex justify-center items-center bg-pokedex">
-  <div class="bg-red-600 border-[8px] border-black w-[350px] sm:w-[420px] p-6 rounded-3xl shadow-[0_0_15px_black] text-white font-sans">
+<div class="min-h-screen flex justify-center items-center bg-pokedex p-4">
+  <div class="relative w-[400px] sm:w-[440px] bg-red-700 border-[10px] border-black rounded-[30px] shadow-[0_8px_30px_rgba(0,0,0,0.8)] overflow-hidden font-sans">
 
     <!-- LED -->
-    <div class="w-6 h-6 bg-cyan-300 rounded-full border-2 border-white shadow absolute -mt-4 ml-1"></div>
+    <div class="absolute w-6 h-6 bg-cyan-300 rounded-full border-2 border-white shadow top-3 left-3 z-10"></div>
 
-    <!-- Tela -->
-    <div class="bg-gray-100 h-48 rounded-md flex items-center justify-center mb-4 border-4 border-black relative">
+    <!-- Tela com borda -->
+    <div class="bg-gray-100 h-48 w-[92%] mx-auto mt-12 rounded-md border-4 border-black flex items-center justify-center shadow-inner">
       <img
         *ngIf="pokemon()"
         class="h-32 drop-shadow-lg"
@@ -15,42 +15,71 @@
     </div>
 
     <!-- Nome + ID -->
-    <div *ngIf="pokemon()" class="text-center text-black mb-2">
-      <h2 class="text-xl font-bold capitalize">{{ pokemon().name }}</h2>
-      <p class="text-xs text-gray-700">#{{ pokemon().id }}</p>
+    <div *ngIf="pokemon()" class="text-center text-white mt-3">
+      <h2 class="text-2xl font-bold capitalize">{{ pokemon().name }}</h2>
+      <p class="text-sm text-gray-200">#{{ pokemon().id }}</p>
     </div>
 
     <!-- Tipos -->
-    <div *ngIf="pokemon()" class="flex justify-center gap-2 mb-2">
+    <div *ngIf="pokemon()" class="flex justify-center gap-2 mt-2">
       <span
         *ngFor="let t of pokemon().types"
-        class="text-white text-xs px-2 py-1 rounded bg-gray-800 capitalize"
+        class="text-white text-xs px-3 py-1 rounded-full capitalize font-semibold"
+        [ngClass]="{
+          'bg-green-600': t.type.name === 'grass',
+          'bg-red-600': t.type.name === 'fire',
+          'bg-blue-600': t.type.name === 'water',
+          'bg-yellow-400': t.type.name === 'electric',
+          'bg-purple-600': t.type.name === 'poison',
+          'bg-gray-700': t.type.name === 'normal',
+          'bg-pink-400': t.type.name === 'fairy',
+          'bg-orange-500': t.type.name === 'fighting',
+          'bg-indigo-500': t.type.name === 'psychic',
+          'bg-cyan-500': t.type.name === 'ice',
+          'bg-lime-500': t.type.name === 'bug',
+          'bg-zinc-700': t.type.name === 'ghost',
+          'bg-slate-500': t.type.name === 'rock',
+          'bg-neutral-600': t.type.name === 'ground',
+          'bg-sky-500': t.type.name === 'flying',
+          'bg-emerald-600': t.type.name === 'dragon',
+          'bg-lime-700': t.type.name === 'steel'
+        }"
       >
         {{ t.type.name }}
       </span>
     </div>
 
     <!-- Peso e Altura -->
-    <div *ngIf="pokemon()" class="text-sm text-black text-center mb-4">
+    <div *ngIf="pokemon()" class="text-white text-sm text-center mt-3">
       <p>Peso: {{ pokemon().weight / 10 }} kg</p>
       <p>Altura: {{ pokemon().height / 10 }} m</p>
     </div>
 
-    <!-- Campo busca -->
-    <input
-      [(ngModel)]="inputValue"
-      (keyup.enter)="search()"
-      placeholder="Name or Number"
-      class="w-full p-2 mb-3 text-black rounded text-sm shadow-inner"
-    />
+    <!-- Campo de busca -->
+<div class="px-6 mt-4 flex flex-col items-center gap-2">
+  <input
+    [(ngModel)]="inputValue"
+    placeholder="Name or Number"
+    class="w-full p-2 rounded text-black text-sm shadow-inner text-center"
+  />
+
+  <!-- Botão buscar -->
+  <button
+    (click)="search()"
+    class="bg-black text-white px-6 py-2 rounded-full text-xs uppercase shadow hover:scale-105 transition"
+  >
+    Buscar
+  </button>
+</div>
+
 
     <!-- Botões -->
-    <div class="flex justify-between">
-      <button (click)="prev()" class="bg-gray-900 px-4 py-2 rounded shadow">
-        Prev
+    <div class="flex justify-between px-6 mt-4 mb-6">
+      <button (click)="prev()" class="bg-black text-white px-5 py-2 rounded-full shadow hover:scale-105 transition">
+        Anterior
       </button>
-      <button (click)="next()" class="bg-gray-900 px-4 py-2 rounded shadow">
-        Next
+      <button (click)="next()" class="bg-black text-white px-5 py-2 rounded-full shadow hover:scale-105 transition">
+        Próximo
       </button>
     </div>
   </div>
