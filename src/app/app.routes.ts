@@ -1,6 +1,6 @@
-import { Routes } from '@angular/router';
-import { PokedexComponent } from './pages/pokedex.component';
+import { Routes } from "@angular/router";
+import { PokedexShellComponent } from "./pages/pokedex/pokedex-shell/pokedex-shell.component";
 
 export const routes: Routes = [
-  { path: '', component: PokedexComponent }
+  { path: '', component: PokedexShellComponent },
 ];

@@ -1,0 +1,37 @@
+<div class="min-h-screen flex justify-center items-center bg-gradient-to-b from-red-600 to-red-800">
+  <div class="bg-red-700 border-[6px] border-black w-[300px] p-4 rounded-3xl shadow-2xl text-white">
+    <!-- Tela -->
+    <div class="bg-white h-40 rounded-md flex items-center justify-center mb-4 border border-gray-300">
+      <img
+        *ngIf="pokemon()"
+        class="h-32"
+        [src]="pokemon().sprites.front_default"
+        [alt]="pokemon().name"
+      />
+    </div>
+
+    <!-- Nome -->
+    <p *ngIf="pokemon()" class="capitalize text-black text-center font-bold text-lg mb-2">
+      {{ pokemon().name }}
+    </p>
+
+    <!-- Campo busca -->
+    <input
+      [(ngModel)]="inputValue"
+      (keyup.enter)="search()"
+      placeholder="Name or Number"
+      class="w-full p-2 mb-3 text-black rounded text-sm"
+    />
+
+
+    <!-- Botões -->
+    <div class="flex justify-between">
+      <button (click)="prev()" class="bg-gray-900 px-4 py-1 rounded shadow">
+        Prev
+      </button>
+      <button (click)="next()" class="bg-gray-900 px-4 py-1 rounded shadow">
+        Next
+      </button>
+    </div>
+  </div>
+</div>

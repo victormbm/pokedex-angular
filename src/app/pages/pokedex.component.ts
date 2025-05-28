@@ -1,11 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PokemonApiService } from '../core/services/pokemon-api.service';
+import { ExtractIdPipe } from '../shared/pipes/extract-id.pipe';
+import { PokedexCardComponent } from '../shared/components/pokedex-card.component';
 
 @Component({
   selector: 'app-pokedex',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ExtractIdPipe,PokedexCardComponent],
   providers: [PokemonApiService],
   templateUrl: './pokedex.component.html',
 })
