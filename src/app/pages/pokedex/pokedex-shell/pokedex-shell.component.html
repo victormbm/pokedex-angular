@@ -1,35 +1,55 @@
-<div class="min-h-screen flex justify-center items-center bg-gradient-to-b from-red-600 to-red-800">
-  <div class="bg-red-700 border-[6px] border-black w-[300px] p-4 rounded-3xl shadow-2xl text-white">
+<div class="min-h-screen flex justify-center items-center bg-pokedex">
+  <div class="bg-red-600 border-[8px] border-black w-[350px] sm:w-[420px] p-6 rounded-3xl shadow-[0_0_15px_black] text-white font-sans">
+
+    <!-- LED -->
+    <div class="w-6 h-6 bg-cyan-300 rounded-full border-2 border-white shadow absolute -mt-4 ml-1"></div>
+
     <!-- Tela -->
-    <div class="bg-white h-40 rounded-md flex items-center justify-center mb-4 border border-gray-300">
+    <div class="bg-gray-100 h-48 rounded-md flex items-center justify-center mb-4 border-4 border-black relative">
       <img
         *ngIf="pokemon()"
-        class="h-32"
-        [src]="pokemon().sprites.front_default"
+        class="h-32 drop-shadow-lg"
+        [src]="pokemon().sprites?.front_default"
         [alt]="pokemon().name"
       />
     </div>
 
-    <!-- Nome -->
-    <p *ngIf="pokemon()" class="capitalize text-black text-center font-bold text-lg mb-2">
-      {{ pokemon().name }}
-    </p>
+    <!-- Nome + ID -->
+    <div *ngIf="pokemon()" class="text-center text-black mb-2">
+      <h2 class="text-xl font-bold capitalize">{{ pokemon().name }}</h2>
+      <p class="text-xs text-gray-700">#{{ pokemon().id }}</p>
+    </div>
+
+    <!-- Tipos -->
+    <div *ngIf="pokemon()" class="flex justify-center gap-2 mb-2">
+      <span
+        *ngFor="let t of pokemon().types"
+        class="text-white text-xs px-2 py-1 rounded bg-gray-800 capitalize"
+      >
+        {{ t.type.name }}
+      </span>
+    </div>
+
+    <!-- Peso e Altura -->
+    <div *ngIf="pokemon()" class="text-sm text-black text-center mb-4">
+      <p>Peso: {{ pokemon().weight / 10 }} kg</p>
+      <p>Altura: {{ pokemon().height / 10 }} m</p>
+    </div>
 
     <!-- Campo busca -->
     <input
       [(ngModel)]="inputValue"
       (keyup.enter)="search()"
       placeholder="Name or Number"
-      class="w-full p-2 mb-3 text-black rounded text-sm"
+      class="w-full p-2 mb-3 text-black rounded text-sm shadow-inner"
     />
-
 
     <!-- Botões -->
     <div class="flex justify-between">
-      <button (click)="prev()" class="bg-gray-900 px-4 py-1 rounded shadow">
+      <button (click)="prev()" class="bg-gray-900 px-4 py-2 rounded shadow">
         Prev
       </button>
-      <button (click)="next()" class="bg-gray-900 px-4 py-1 rounded shadow">
+      <button (click)="next()" class="bg-gray-900 px-4 py-2 rounded shadow">
         Next
       </button>
     </div>

@@ -2,3 +2,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+body {
+  font-family: 'Press Start 2P', system-ui, sans-serif;
+}
+
+
+.bg-pokedex {
+  background-image: url('/assets/pokemon-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
